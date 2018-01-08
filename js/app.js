@@ -1,4 +1,4 @@
-// GENERIC FUNCTION
+// RANDOM STRING GENERATOR
 function randomString() {
   var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
   var str = '',
@@ -9,6 +9,7 @@ function randomString() {
   return str;
 }
 
+// API
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 var myHeaders = {
   'X-Client-Id': '2639',
@@ -17,6 +18,14 @@ var myHeaders = {
 
 $.ajaxSetup({
   headers: myHeaders
+});
+
+$.ajax({
+  url: baseUrl + '/board',
+  method: 'GET',
+  success: function(response) {
+    setupColumns(response.columns);
+  }
 });
 
 // CREATING NEW COLUMNS
