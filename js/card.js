@@ -1,28 +1,58 @@
 // KANBAN CARD CLASS
-function Card(description) {
+function Card(id, name) {
   var self = this;
 
-  this.id = randomString();
-  this.description = description;
+  this.id = id;
+  this.name = name || 'No name given';
   this.element = createCard();
 
   function createCard() {
-    var card = $('<li class="card"></li>');
-    var cardDeleteBtn = $('<button class="btn-delete">x</button>');
-    var cardDescription = $('<p class="card-description"></p>');
+    var card = $('<li>').addClass('card');
+    var cardDescription = $('<p>').addClass('card-description').text(self.name);
+    var cardDeleteBtn = $('<button>').addClass('btn-delete').html('<i class="fa fa-trash" aria-hidden="true"></i>');
+    var cardEdit = $('<button>').addClass('btn-edit').html('<i class="fa fa-pencil" aria-hidden="true"></i>');
 
     cardDeleteBtn.click(function() {
       self.removeCard();
     });
 
-    card.append(cardDeleteBtn);
-    cardDescription.text(self.description);
-    card.append(cardDescription)
+    cardEdit.click(function() {
+      self.editCard();
+    });
+
+    card.append(cardDeleteBtn)
+      .append(cardEdit)
+      .append(cardDescription);
     return card;
   }
 }
 Card.prototype = {
   removeCard: function() {
-    this.element.remove();
+    var self = this;
+    $.ajax({
+      url: baseUrl + '/card/' + self.id,
+      method: 'DELETE',
+      success: function() {
+        self.element.remove();
+      }
+    });
+  },
+  editCard: function() {
+    var self = this;
+    self.name = prompt('Edit your card:', self.name);
+    var parentColumn = $(this.element).closest('div[data-idnum]').attr('data-idnum');
+    console.log(parentColumn);
+    $.ajax({
+      url: baseUrl + '/card/' + self.id,
+      type: 'PUT',
+      data: {
+        id: self.id,
+        name: self.name,
+        bootcamp_kanban_column_id: parseInt(parentColumn)
+      },
+      success: function(response) {
+        self.element.children('.card-description').text(self.name);
+      }
+    });
   }
-}
+};
