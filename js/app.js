@@ -1,11 +1,11 @@
-// API
+//  API
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 var myHeaders = {
   'X-Client-Id': '2639',
   'X-Auth-Token': 'd51d4af6c79ca9c606ab81e28e0ddc87'
 };
 
-// SET API HEADERS
+//  SET API HEADERS
 $.ajaxSetup({
   headers: myHeaders
 });
@@ -18,7 +18,7 @@ $.ajax({
   }
 });
 
-// SETUP COLUMNS
+//  SETUP COLUMNS
 function setupColumns(columns) {
   columns.forEach(function(column) {
     var col = new Column(column.id, column.name);

@@ -6,7 +6,7 @@ function Column(id, name) {
   this.element = createColumn();
 
   function createColumn() {
-    // CREATE NEW NODES
+    //  CREATE NEW NODES
     var column = $('<div>').addClass('column').attr('data-idnum', self.id);
     var columnTitle = $('<h2>').addClass('column-title').text(self.name);
     var columnCardList = $('<ul>').addClass('column-card-list');
@@ -15,7 +15,7 @@ function Column(id, name) {
     var columnAddCard = $('<button>').addClass('add-card').text('Add new task');
 
 
-    // ADD EVENTS TO NODES
+    //  ADD EVENTS TO NODES
     columnDelete.click(function() {
       self.deleteColumn();
     });
@@ -41,7 +41,7 @@ function Column(id, name) {
       });
     });
 
-    // COLUMN ELEMENT GENERATOR
+    //  COLUMN ELEMENT GENERATOR
     column.append(columnTitle)
       .append(columnDelete)
       .append(columnEdit)

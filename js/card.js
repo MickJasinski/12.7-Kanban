@@ -1,4 +1,4 @@
-// KANBAN CARD CLASS
+//  KANBAN CARD CLASS
 function Card(id, name) {
   var self = this;
 
