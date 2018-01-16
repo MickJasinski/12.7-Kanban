@@ -14,27 +14,23 @@ function initSortable() {
   }).disableSelection();
 }
 //  CREATE COLUMN
-$('.create-column')
-  .click(function() {
-    var columnName = prompt('Enter a column name');
-
-    if (columnName.length > 10) {
-      alert('This name is too long!');
-    } else {
-      $.ajax({
-        url: baseUrl + '/column',
-        method: 'POST',
-        data: {
-          name: columnName
-        },
-        success: function(response) {
-          var column = new Column(response.id, columnName);
-          board.createColumn(column);
-        }
-      });
-    }
-
-
-
-
-  });
+$('.create-column').click(function() {
+  var columnName = prompt('Enter a column name');
+  if (columnName == null) {
+    return null;
+  } else if (columnName.length > 10) {
+    alert('This name is too long!');
+  } else {
+    $.ajax({
+      url: baseUrl + '/column',
+      method: 'POST',
+      data: {
+        name: columnName
+      },
+      success: function(response) {
+        var column = new Column(response.id, columnName);
+        board.createColumn(column);
+      }
+    });
+  }
+});

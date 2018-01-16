@@ -42,17 +42,21 @@ Card.prototype = {
     self.name = prompt('Edit your card:', self.name);
     var parentColumn = $(this.element).closest('div[data-idnum]').attr('data-idnum');
     console.log(parentColumn);
-    $.ajax({
-      url: baseUrl + '/card/' + self.id,
-      type: 'PUT',
-      data: {
-        id: self.id,
-        name: self.name,
-        bootcamp_kanban_column_id: parseInt(parentColumn)
-      },
-      success: function(response) {
-        self.element.children('.card-description').text(self.name);
-      }
-    });
+    if (self.name == null) {
+      return null;
+    } else {
+      $.ajax({
+        url: baseUrl + '/card/' + self.id,
+        type: 'PUT',
+        data: {
+          id: self.id,
+          name: self.name,
+          bootcamp_kanban_column_id: parseInt(parentColumn)
+        },
+        success: function(response) {
+          self.element.children('.card-description').text(self.name);
+        }
+      });
+    }
   }
 };
