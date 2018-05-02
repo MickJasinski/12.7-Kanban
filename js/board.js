@@ -7,6 +7,7 @@ var board = {
   element: $('#board .column-container')
 };
 
+//  DRAG & DROP
 function initSortable() {
   $('.column-card-list').sortable({
     connectWith: '.column-card-list',

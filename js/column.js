@@ -71,8 +71,8 @@ Column.prototype = {
   editColumn: function() {
     var self = this;
     var newName = prompt('Edit your column:', self.name);
-    if (newName.length > 10) {
-      alert('This name is too long!');
+    if (newName === null) {
+      return newName = 'name';
     } else {
       event.preventDefault();
       if (newName != self.name) {
